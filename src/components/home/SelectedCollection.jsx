@@ -7,22 +7,57 @@ import Skeleton from '../ui/Skeleton';
 
 export default function SelectedCollection() {
   const [collection, setCollection] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchCollection() {
-      const { data } = await axios.get('https://remote-internship-api-production.up.railway.app/selectedCollection');
+      try {
+        setLoading(true);
+        setError(null);
+        const { data } = await axios.get('https://remote-internship-api-production.up.railway.app/selectedCollection');
 
-      setCollection(data.data);
+        setCollection(data.data);
+      } catch (error) {
+        setError(error.message || 'Failed to fetch collection');
+        console.error('Error fetching collection:', error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchCollection();
   }, []);
 
-  if (!collection) {
+  if (loading) {
     return (
       <header>
         <div className='selected-collection'>
           <Skeleton width='100%' height='100%' borderRadius='0px' />
+        </div>
+      </header>
+    );
+  }
+
+  if (error) {
+    return (
+      <header>
+        <div className='selected-collection'>
+          <div className='selected-collection__description'>
+            <p style={{ color: 'red', fontSize: '24px' }}>{error}</p>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
+  if (!collection) {
+    return (
+      <header>
+        <div className='selected-collection'>
+          <div className='selected-collection__description'>
+            <p style={{ color: 'red', fontSize: '24px' }}>No collection found</p>
+          </div>
         </div>
       </header>
     );
