@@ -100,7 +100,13 @@ export default function NewCollections() {
           >
             {collections.map((collection, index) => (
               <SwiperSlide className='collection-column' key={index}>
-                <CollectionCard collection={collection} />
+                <CollectionCard
+                  id={collection.collectionId}
+                  imageLink={collection.imageLink}
+                  title={collection.title}
+                  floor={collection.floor}
+                  totalVolume={collection.totalVolume}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
