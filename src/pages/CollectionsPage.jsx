@@ -47,8 +47,6 @@ export default function CollectionsPage() {
     );
   }
 
-  console.log(collections);
-
   return (
     <div className='container'>
       <div className='row'>
