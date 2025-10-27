@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import axios from 'axios';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { useFetch } from '../hooks/useFetch';
 
 import Skeleton from '../ui/Skeleton';
 
@@ -10,26 +11,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 export default function NewCollections() {
-  const [collections, setCollections] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchCollections() {
-      try {
-        setLoading(true);
-        setError(null);
-        const { data } = await axios.get('https://remote-internship-api-production.up.railway.app/newCollections');
-        setCollections(data.data);
-      } catch (error) {
-        setError(error.message || 'Failed to fetch collections');
-        console.error('Error fetching collections:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchCollections();
-  }, []);
+  const { data: collections, loading, error } = useFetch('/newCollections');
 
   if (loading) {
     return (
