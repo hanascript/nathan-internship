@@ -47,6 +47,8 @@ export default function CollectionsPage() {
     );
   }
 
+  console.log(collections);
+
   return (
     <div className='container'>
       <div className='row'>
@@ -54,7 +56,13 @@ export default function CollectionsPage() {
         <div className='collections__body'>
           {visibleItems.map((collection, index) => (
             <div className='collection-column' key={index}>
-              <CollectionCard collection={collection} />
+              <CollectionCard
+                id={collection.id}
+                imageLink={collection.imageLink}
+                title={collection.title}
+                floor={collection.floor}
+                totalVolume={collection.totalVolume}
+              />
             </div>
           ))}
         </div>
