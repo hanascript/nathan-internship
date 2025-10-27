@@ -1,31 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+import { useFetch } from '../hooks/useFetch';
 
 import VerifiedIcon from '../../assets/verified.png';
 import Skeleton from '../ui/Skeleton';
 
 export default function Trending() {
-  const [trending, setTrending] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchTrending() {
-      try {
-        setLoading(true);
-        setError(null);
-        const { data } = await axios.get('https://remote-internship-api-production.up.railway.app/trendingNFTs');
-        setTrending(data.data);
-      } catch (error) {
-        setError(error.message || 'Failed to fetch trending');
-        console.error('Error fetching trending:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchTrending();
-  }, []);
+  const { data: trending, loading, error } = useFetch('/trendingNFTs');
 
   if (loading) {
     return (
