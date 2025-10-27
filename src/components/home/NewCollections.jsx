@@ -1,40 +1,170 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import axios from 'axios';
+
+import Skeleton from '../ui/Skeleton';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 export default function NewCollections() {
-  return (
-    <section id="new-collections">
-      <div className="container">
-        <div className="row">
-          <h2 className="new-collections__title">New Collections</h2>
-          <div className="new-collections__body">
-            {new Array(6).fill(0).map((_, index) => (
-              <div className="collection-column">
-                <Link to="/collection" key={index} className="collection">
-                  <img
-                    src="https://i.seadn.io/gcs/files/a5414557ae405cb6233b4e2e4fa1d9e6.jpg?auto=format&dpr=1&w=1920"
-                    alt=""
-                    className="collection__img"
-                  />
-                  <div className="collection__info">
-                    <h3 className="collection__name">Bored Ape Kennel Club</h3>
-                    <div className="collection__stats">
-                      <div className="collection__stat">
-                        <span className="collection__stat__label">Floor</span>
-                        <span className="collection__stat__data">0.46 ETH</span>
+  const [collections, setCollections] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchCollections() {
+      try {
+        setLoading(true);
+        setError(null);
+        const { data } = await axios.get('https://remote-internship-api-production.up.railway.app/newCollections');
+        setCollections(data.data);
+      } catch (error) {
+        setError(error.message || 'Failed to fetch collections');
+        console.error('Error fetching collections:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchCollections();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id='new-collections'>
+        <div className='container'>
+          <div className='row'>
+            <h2 className='new-collections__title'>New Collections</h2>
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={16}
+              loop={true}
+              navigation={true}
+              modules={[Navigation]}
+              className='new-collections__body'
+              breakpoints={{
+                480: {
+                  slidesPerView: 2,
+                },
+                768: {
+                  slidesPerView: 3,
+                },
+                1024: {
+                  slidesPerView: 4,
+                },
+                1200: {
+                  slidesPerView: 5,
+                },
+                1600: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
+              {new Array(9).fill(0).map((_, index) => (
+                <SwiperSlide className='collection-column'>
+                  <Link to='/collection' key={index} className='collection'>
+                    <div className='collection__img'>
+                      <Skeleton width='100%' height='100%' borderRadius='2px' />
+                    </div>
+                    <div className='collection__info'>
+                      <h3 className='collection__name'>
+                        <Skeleton width='100%' height='18px' borderRadius='2px' />
+                      </h3>
+                      <div className='collection__stats'>
+                        <div className='collection__stat'>
+                          <span className='collection__stat__label'>
+                            <Skeleton width='60%' height='18px' borderRadius='2px' />
+                          </span>
+                          <span className='collection__stat__data'>
+                            <Skeleton width='85%' height='18px' borderRadius='2px' />
+                          </span>
+                        </div>
+                        <div className='collection__stat'>
+                          <span className='collection__stat__label'>
+                            <Skeleton width='60%' height='18px' borderRadius='2px' />
+                          </span>
+                          <span className='collection__stat__data'>
+                            <Skeleton width='85%' height='18px' borderRadius='2px' />
+                          </span>
+                        </div>
                       </div>
-                      <div className="collection__stat">
-                        <span className="collection__stat__label">
-                          Total Volume
-                        </span>
-                        <span className="collection__stat__data">281K ETH</span>
+                    </div>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id='new-collections'>
+        <div className='container'>
+          <div className='row'>
+            <h2 className='new-collections__title'>New Collections</h2>
+            <p style={{ color: 'red' }}>{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id='new-collections'>
+      <div className='container'>
+        <div className='row'>
+          <h2 className='new-collections__title'>New Collections</h2>
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={16}
+            loop={true}
+            navigation={true}
+            modules={[Navigation]}
+            className='new-collections__body'
+            breakpoints={{
+              480: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+              1200: {
+                slidesPerView: 5,
+              },
+              1600: {
+                slidesPerView: 6,
+              },
+            }}
+          >
+            {collections.map((collection, index) => (
+              <SwiperSlide className='collection-column'>
+                <Link to={`/collection/${collection.collectionId}`} key={index} className='collection'>
+                  <img src={collection.imageLink} alt='' className='collection__img' />
+                  <div className='collection__info'>
+                    <h3 className='collection__name'>{collection.title}</h3>
+                    <div className='collection__stats'>
+                      <div className='collection__stat'>
+                        <span className='collection__stat__label'>Floor</span>
+                        <span className='collection__stat__data'>{Number(collection.floor).toFixed(2)} ETH</span>
+                      </div>
+                      <div className='collection__stat'>
+                        <span className='collection__stat__label'>Total Volume</span>
+                        <span className='collection__stat__data'>{collection.totalVolume} ETH</span>
                       </div>
                     </div>
                   </div>
                 </Link>
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </div>
     </section>

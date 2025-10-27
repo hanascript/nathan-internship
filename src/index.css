@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 * {
   padding: 0;
@@ -1869,4 +1869,32 @@ USER PAGE
   .item-column {
     width: calc((100% / 1) - 16px + (16px / 1));
   }
+}
+
+/* Swiper */
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(204, 204, 204);
+  border-image: initial;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.swiper-button-next svg,
+.swiper-button-prev svg {
+  width: 20px;
+  height: 20px;
 }
