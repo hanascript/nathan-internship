@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import VerifiedIcon from '../../assets/verified.png';
-import TrendingCollection from '../../assets/trending-collection.avif';
 import { Link } from 'react-router-dom';
+
+import VerifiedIcon from '../../assets/verified.png';
 import Skeleton from '../ui/Skeleton';
 
 export default function Trending() {
