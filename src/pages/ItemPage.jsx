@@ -1,13 +1,10 @@
-import { faEthereum } from '@fortawesome/free-brands-svg-icons';
-import { faEye, faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faShapes, faShoppingBag, faTag } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 import { useFetch } from '../components/hooks/useFetch';
-import ItemCountdown from '../components/item/ItemCountdown';
-import RecommendedItems from '../components/item/RecommendedItems';
+
 import ItemContent from '../components/item/ItemContent';
+import RecommendedItems from '../components/item/RecommendedItems';
 
 export default function ItemPage() {
   const { id } = useParams();
