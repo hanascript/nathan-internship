@@ -10,13 +10,13 @@ import { Carousel, CarouselItem } from '../ui/Carousel';
 import ItemCard from '../ui/ItemCard';
 import Skeleton from '../ui/Skeleton';
 
-export default function RecommendedItems({ collectionId, itemId }) {
-  const { data: collection, loading, error } = useFetch(collectionId ? `/collection/${collectionId}` : null);
+export default function RecommendedItems({ collectionId, itemId, loading }) {
+  const { data: collection, loading: collectionLoading, error } = useFetch(collectionId ? `/collection/${collectionId}` : null);
 
   const recommendedCollectionItems =
     collection && itemId && collection.items.filter(item => item.itemId !== itemId).slice(0, 10);
 
-  if (loading) {
+  if (loading || collectionLoading) {
     return (
       <section id='recommended-items'>
         <div className='container'>
@@ -26,11 +26,13 @@ export default function RecommendedItems({ collectionId, itemId }) {
                 <Skeleton width='240px' height='16px' borderRadius='4px' />
               </div>
               <div className='recommended-items__body'>
-                {new Array(6).fill(0).map((_, index) => (
-                  <div className='item-column' key={index}>
-                    <ItemCard.Skeleton />
-                  </div>
-                ))}
+                <Carousel>
+                  {new Array(6).fill(0).map((_, index) => (
+                    <CarouselItem key={index}>
+                      <ItemCard.Skeleton />
+                    </CarouselItem>
+                  ))}
+                </Carousel>
               </div>
               <div className='recommended-items__footer'>
                 <Skeleton width='168px' height='48px' borderRadius='8px' />

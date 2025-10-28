@@ -17,8 +17,8 @@ export default function ItemPage() {
 
   return (
     <>
-      <ItemContent {...item} loading={loading} />
-      <RecommendedItems collectionId={item?.collectionId} itemId={item?.id} collectionLoading={loading} />
+      <ItemContent {...item} loading={true} />
+      <RecommendedItems collectionId={item?.collectionId} itemId={item?.id} loading={loading} />
     </>
   );
 }
