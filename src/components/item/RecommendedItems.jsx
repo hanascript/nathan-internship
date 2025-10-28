@@ -3,11 +3,42 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
+import Skeleton from '../ui/Skeleton';
+import ItemCard from '../ui/ItemCard';
 
-export default function RecommendedItems({ collectionId, collectionLoading }) {
+export default function RecommendedItems({ collectionId, itemId }) {
   const { data: collection, loading, error } = useFetch(collectionId ? `/collection/${collectionId}` : null);
 
-  console.log(collection);
+  const recommendedCollectionItems =
+    collection && itemId && collection.items.filter(item => item.itemId !== itemId).slice(0, 10);
+
+    console.log(recommendedCollectionItems);
+
+  if (loading) {
+    return (
+      <section id='recommended-items'>
+        <div className='container'>
+          <div className='row recommended-items__row'>
+            <div className='recommended-items__wrapper'>
+              <div className='recommended-items__header'>
+                <Skeleton width='240px' height='16px' borderRadius='4px' />
+              </div>
+              <div className='recommended-items__body'>
+                {new Array(6).fill(0).map((_, index) => (
+                  <div className='item-column' key={index}>
+                    <ItemCard.Skeleton />
+                  </div>
+                ))}
+              </div>
+              <div className='recommended-items__footer'>
+                <Skeleton width='168px' height='48px' borderRadius='8px' />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id='recommended-items'>
@@ -19,28 +50,9 @@ export default function RecommendedItems({ collectionId, collectionLoading }) {
               <h3 className='recommended-items__header__title'>More from this collection</h3>
             </div>
             <div className='recommended-items__body'>
-              {new Array(6).fill(0).map((_, index) => (
+              {recommendedCollectionItems?.map((item, index) => (
                 <div className='item-column' key={index}>
-                  <Link to={'/item'} className='item'>
-                    <figure className='item__img__wrapper'>
-                      <img
-                        src='https://i.seadn.io/gcs/files/0a085499e0f3800321618af356c5d36b.png?auto=format&dpr=1&w=384'
-                        alt=''
-                        className='item__img'
-                      />
-                    </figure>
-                    <div className='item__details'>
-                      <span className='item__details__name'>Meebit #0001</span>
-                      <span className='item__details__price'>0.98 ETH</span>
-                      <span className='item__details__last-sale'>Last sale: 7.45 ETH</span>
-                    </div>
-                    <div className='item__see-more'>
-                      <button className='item__see-more__button'>See More</button>
-                      <div className='item__see-more__icon'>
-                        <FontAwesomeIcon icon={faShoppingBag} />
-                      </div>
-                    </div>
-                  </Link>
+                  <ItemCard {...item} />
                 </div>
               ))}
             </div>
