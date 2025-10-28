@@ -1,23 +1,27 @@
 import axiosInstance from '../api/axiosConfig';
 import { useState, useEffect } from 'react';
 
-export const useFetch = (url) => {
+export const useFetch = url => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!url) {
+        setLoading(false);
+        return;
+      }
+
       try {
-        setLoading(true)
+        setLoading(true);
         const response = await axiosInstance.get(url);
         setData(response.data.data);
-        setError(null)
+        setError(null);
+        setLoading(false);
       } catch (err) {
         setError(err.message || 'Failed to fetch data');
         console.error('Error fetching data:', err);
-      } finally {
-        setLoading(false);
       }
     };
     fetchData();

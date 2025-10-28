@@ -20,27 +20,8 @@ export default function CollectionPage() {
 
   return (
     <>
-      <CollectionHeader
-        title={collection?.title}
-        logo={collection?.logo}
-        imageLink={collection?.imageLink}
-        creatorId={collection?.creatorId}
-        creator={collection?.creator}
-        totalVolume={collection?.totalVolume}
-        floor={collection?.floor}
-        bestOffer={collection?.bestOffer}
-        listed={collection?.listed}
-        owners={collection?.owners}
-        loading={loading}
-      />
-      <CollectionInfo
-        description={collection?.description}
-        creatorEarnings={collection?.creatorEarnings}
-        chain={collection?.chain}
-        createdDate={collection?.createdDate}
-        totalItems={collection?.items.length}
-        loading={loading}
-      />
+      <CollectionHeader {...collection} loading={loading} />
+      <CollectionInfo {...collection} loading={loading} />
       <CollectionItems items={collection?.items} loading={loading} />
     </>
   );
