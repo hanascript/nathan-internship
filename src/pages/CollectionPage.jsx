@@ -1,18 +1,47 @@
-import React, { useEffect } from "react";
-import CollectionHeader from "../components/collection/CollectionHeader";
-import CollectionInfo from "../components/collection/CollectionInfo";
-import CollectionItems from "../components/collection/CollectionItems";
+import React, { useEffect } from 'react';
+import CollectionHeader from '../components/collection/CollectionHeader';
+import CollectionInfo from '../components/collection/CollectionInfo';
+import CollectionItems from '../components/collection/CollectionItems';
+import { useParams } from 'react-router-dom';
+import { useFetch } from '../components/hooks/useFetch';
 
 export default function CollectionPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const { id } = useParams();
+
+  const { data: collection, loading, error } = useFetch(`/collection/${id}`);
+
+  if (error) {
+    return <div>Error loading collection: {error}</div>;
+  }
+
   return (
     <>
-      <CollectionHeader />
-      <CollectionInfo />
-      <CollectionItems />
+      <CollectionHeader
+        title={collection?.title}
+        logo={collection?.logo}
+        imageLink={collection?.imageLink}
+        creatorId={collection?.creatorId}
+        creator={collection?.creator}
+        totalVolume={collection?.totalVolume}
+        floor={collection?.floor}
+        bestOffer={collection?.bestOffer}
+        listed={collection?.listed}
+        owners={collection?.owners}
+        loading={loading}
+      />
+      <CollectionInfo
+        description={collection?.description}
+        creatorEarnings={collection?.creatorEarnings}
+        chain={collection?.chain}
+        createdDate={collection?.createdDate}
+        totalItems={collection?.items.length}
+        loading={loading}
+      />
+      <CollectionItems items={collection?.items} loading={loading} />
     </>
   );
 }
