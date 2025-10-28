@@ -42,12 +42,9 @@ export default function CollectionItems({ items, loading }) {
         <div className='row collection-items__row'>
           <div className='collection-items__header'>
             <div className='collection-items__header__left'>
-              <span className='collection-items__header__live'>
-                <Skeleton width='52px' height='16px' borderRadius='4px' />
-              </span>
-              <span className='collection-items__header__results'>
-                <Skeleton width='72px' height='16px' borderRadius='4px' />
-              </span>
+              <Skeleton width='52px' height='16px' borderRadius='4px' />
+
+              <Skeleton width='72px' height='16px' borderRadius='4px' />
             </div>
 
             <Skeleton width='240px' height='48px' borderRadius='8px' />
@@ -55,7 +52,7 @@ export default function CollectionItems({ items, loading }) {
           <div className='collection-items__body'>
             {new Array(visible).fill(0).map((_, index) => (
               <div className='item-column' key={index}>
-                <Link to={'/item'} className='item'>
+                <div className='item'>
                   <figure className='item__img__wrapper'>
                     <Skeleton width='100%' height='100%' borderRadius='0px' />
                   </figure>
@@ -70,7 +67,7 @@ export default function CollectionItems({ items, loading }) {
                       <Skeleton width='120px' height='18px' borderRadius='4px' />
                     </span>
                   </div>
-                </Link>
+                </div>
               </div>
             ))}
           </div>
