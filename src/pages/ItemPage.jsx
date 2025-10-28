@@ -36,7 +36,7 @@ export default function ItemPage() {
         loading={loading}
       />
 
-      <RecommendedItems />
+      <RecommendedItems collectionId={item?.collectionId} collectionLoading={loading} />
     </>
   );
 }

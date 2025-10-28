@@ -2,8 +2,13 @@ import { faShoppingBag, faTableCells } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useFetch } from '../hooks/useFetch';
 
-export default function RecommendedItems() {
+export default function RecommendedItems({ collectionId, collectionLoading }) {
+  const { data: collection, loading, error } = useFetch(collectionId ? `/collection/${collectionId}` : '/');
+
+  console.log(collection);
+
   return (
     <section id='recommended-items'>
       <div className='container'>
@@ -40,7 +45,7 @@ export default function RecommendedItems() {
               ))}
             </div>
             <div className='recommended-items__footer'>
-              <Link to={'/collection'} className='recommended-items__footer__button'>
+              <Link to={`/collection/${collectionId}`} className='recommended-items__footer__button'>
                 View Collection
               </Link>
             </div>
