@@ -4,20 +4,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Skeleton from '../ui/Skeleton';
 
-const ItemCard = () => {
+const ItemCard = ({ itemId, imageLink, title, price, lastSale}) => {
   return (
-    <Link to={'/item'} className='item'>
+    <Link to={`/item/${itemId}`} className='item'>
       <figure className='item__img__wrapper'>
         <img
-          src='https://i.seadn.io/gcs/files/0a085499e0f3800321618af356c5d36b.png?auto=format&dpr=1&w=384'
+          src={imageLink}
           alt=''
           className='item__img'
         />
       </figure>
       <div className='item__details'>
-        <span className='item__details__name'>Meebit #0001</span>
-        <span className='item__details__price'>0.98 ETH</span>
-        <span className='item__details__last-sale'>Last sale: 7.45 ETH</span>
+        <span className='item__details__name'>{title}</span>
+        <span className='item__details__price'>{price} ETH</span>
+        <span className='item__details__last-sale'>Last sale: {lastSale} ETH</span>
       </div>
       <div className='item__see-more'>
         <button className='item__see-more__button'>See More</button>
