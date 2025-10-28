@@ -2,11 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Skeleton from '../ui/Skeleton';
-/**
- *
- * @returns
- * needs imageLink, title, logo, creatorId, creator
- */
 
 export default function CollectionHeader({
   title,
@@ -28,6 +23,7 @@ export default function CollectionHeader({
       </header>
     );
   }
+
   return (
     <header
       style={{
