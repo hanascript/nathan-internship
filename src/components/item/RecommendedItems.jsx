@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 
 export default function RecommendedItems({ collectionId, collectionLoading }) {
-  const { data: collection, loading, error } = useFetch(collectionId ? `/collection/${collectionId}` : '/');
+  const { data: collection, loading, error } = useFetch(collectionId ? `/collection/${collectionId}` : null);
 
   console.log(collection);
 
