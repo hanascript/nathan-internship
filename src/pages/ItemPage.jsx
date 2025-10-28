@@ -10,33 +10,18 @@ import RecommendedItems from '../components/item/RecommendedItems';
 import ItemContent from '../components/item/ItemContent';
 
 export default function ItemPage() {
+  const { id } = useParams();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  const { id } = useParams();
+  }, [id]);
 
   const { data: item, loading, error } = useFetch(`/item/${id}`);
 
   return (
     <>
-      <ItemContent
-        // favorites={item?.favorites}
-        // imageLink={item?.imageLink}
-        // title={item?.title}
-        // collectionId={item?.collectionId}
-        // collection={item?.collection}
-        // ownerId={item?.ownerId}
-        // owner={item?.owner}
-        // views={item?.views}
-        // expiryDate={item?.expiryDate}
-        // ethPrice={item?.ethPrice}
-        // usdPrice={item?.usdPrice}
-        {...item}
-        loading={loading}
-      />
-
-      <RecommendedItems collectionId={item?.collectionId} collectionLoading={loading} />
+      <ItemContent {...item} loading={loading} />
+      <RecommendedItems collectionId={item?.collectionId} itemId={item?.id} collectionLoading={loading} />
     </>
   );
 }
