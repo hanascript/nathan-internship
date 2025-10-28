@@ -49,11 +49,7 @@ export default function NewCollections() {
             {collections.map((collection, index) => (
               <CarouselItem key={index}>
                 <CollectionCard
-                  id={collection.collectionId}
-                  imageLink={collection.imageLink}
-                  title={collection.title}
-                  floor={collection.floor}
-                  totalVolume={collection.totalVolume}
+                  {...collection}
                 />
               </CarouselItem>
             ))}
