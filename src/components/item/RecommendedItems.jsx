@@ -1,18 +1,20 @@
-import { faShoppingBag, faTableCells } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { faTableCells } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { useFetch } from '../hooks/useFetch';
-import Skeleton from '../ui/Skeleton';
+
+import { Carousel, CarouselItem } from '../ui/Carousel';
+
 import ItemCard from '../ui/ItemCard';
+import Skeleton from '../ui/Skeleton';
 
 export default function RecommendedItems({ collectionId, itemId }) {
   const { data: collection, loading, error } = useFetch(collectionId ? `/collection/${collectionId}` : null);
 
   const recommendedCollectionItems =
     collection && itemId && collection.items.filter(item => item.itemId !== itemId).slice(0, 10);
-
-    console.log(recommendedCollectionItems);
 
   if (loading) {
     return (
@@ -50,11 +52,15 @@ export default function RecommendedItems({ collectionId, itemId }) {
               <h3 className='recommended-items__header__title'>More from this collection</h3>
             </div>
             <div className='recommended-items__body'>
-              {recommendedCollectionItems?.map((item, index) => (
-                <div className='item-column' key={index}>
-                  <ItemCard {...item} />
-                </div>
-              ))}
+              {recommendedCollectionItems && (
+                <Carousel>
+                  {recommendedCollectionItems?.map((item, index) => (
+                    <CarouselItem key={index}>
+                      <ItemCard {...item} />
+                    </CarouselItem>
+                  ))}
+                </Carousel>
+              )}
             </div>
             <div className='recommended-items__footer'>
               <Link to={`/collection/${collectionId}`} className='recommended-items__footer__button'>

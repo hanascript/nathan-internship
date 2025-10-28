@@ -1,8 +1,7 @@
-import { faEye } from '@fortawesome/free-regular-svg-icons';
-import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Skeleton from '../ui/Skeleton';
 
