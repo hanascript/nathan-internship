@@ -6,7 +6,7 @@ import { Carousel, CarouselItem } from '../ui/Carousel';
 import CollectionCard from '../ui/CollectionCard';
 
 export default function NewCollections() {
-  const { data: collections, loading, error } = useFetch('/newCollections');
+  const { data: collections, loading } = useFetch('/newCollections');
 
   if (loading) {
     return (
@@ -21,19 +21,6 @@ export default function NewCollections() {
                 </CarouselItem>
               ))}
             </Carousel>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section id='new-collections'>
-        <div className='container'>
-          <div className='row'>
-            <h2 className='new-collections__title'>New Collections</h2>
-            <p style={{ color: 'red' }}>{error}</p>
           </div>
         </div>
       </section>

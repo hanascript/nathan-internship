@@ -12,11 +12,7 @@ export default function CollectionPage() {
 
   const { id } = useParams();
 
-  const { data: collection, loading, error } = useFetch(`/collection/${id}`);
-
-  if (error) {
-    return <div>Error loading collection: {error}</div>;
-  }
+  const { data: collection, loading } = useFetch(`/collection/${id}`);
 
   return (
     <>

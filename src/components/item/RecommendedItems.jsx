@@ -11,7 +11,9 @@ import ItemCard from '../ui/ItemCard';
 import Skeleton from '../ui/Skeleton';
 
 export default function RecommendedItems({ collectionId, itemId, loading }) {
-  const { data: collection, loading: collectionLoading, error } = useFetch(collectionId ? `/collection/${collectionId}` : null);
+  const { data: collection, loading: collectionLoading } = useFetch(
+    collectionId ? `/collection/${collectionId}` : null
+  );
 
   const recommendedCollectionItems =
     collection && itemId && collection.items.filter(item => item.itemId !== itemId).slice(0, 10);

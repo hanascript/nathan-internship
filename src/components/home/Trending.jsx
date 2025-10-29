@@ -7,11 +7,11 @@ import VerifiedIcon from '../../assets/verified.png';
 import Skeleton from '../ui/Skeleton';
 
 export default function Trending() {
-  const { data: trending, loading, error } = useFetch('/trendingNFTs');
+  const { data: trending, loading } = useFetch('/trendingNFTs');
 
   if (loading) {
     return (
-      <section id='trending'>
+      <section id='trending' data-aos='fade-up'>
         <div className='container'>
           <div className='row trending__row'>
             <div className='trending__header'>
@@ -85,47 +85,6 @@ export default function Trending() {
                       </div>
                     </div>
                   ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section id='trending'>
-        <div className='container'>
-          <div className='row trending__row'>
-            <div className='trending__header'>
-              <h2 className='trending__header__title'>Trending NFTs</h2>
-              <Link className='trending__header__button' to={'/collections'}>
-                View All
-              </Link>
-            </div>
-            <div className='trending__body'>
-              <div className='trending-column'>
-                <div className='trending-column__header'>
-                  <div className='trending-column__header__rank'>#</div>
-                  <div className='trending-column__header__collection'>Collection</div>
-                  <div className='trending-column__header__price'>Floor Price</div>
-                  <div className='trending-column__header__price'>Volume</div>
-                </div>
-                <div className='trending-column__body'>
-                  <p style={{ color: 'red' }}>{error}</p>
-                </div>
-              </div>
-              <div className='trending-column'>
-                <div className='trending-column__header trending-column__header2'>
-                  <div className='trending-column__header__rank'>#</div>
-                  <div className='trending-column__header__collection'>Collection</div>
-                  <div className='trending-column__header__price'>Floor Price</div>
-                  <div className='trending-column__header__price'>Volume</div>
-                </div>
-                <div className='trending-column__body'>
-                  <p style={{ color: 'red' }}>{error}</p>
                 </div>
               </div>
             </div>

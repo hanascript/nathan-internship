@@ -3,7 +3,7 @@ import { useFetch } from '../components/hooks/useFetch';
 import CollectionCard from '../components/ui/CollectionCard';
 
 export default function CollectionsPage() {
-  const { data: collections, loading, error } = useFetch('/collections');
+  const { data: collections, loading } = useFetch('/collections');
 
   const [visibleCollections, setVisibleCollections] = useState(12);
 
@@ -31,17 +31,6 @@ export default function CollectionsPage() {
             ))}
           </div>
           <button className='collections-page__button'>Load more</button>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className='container'>
-        <div className='row'>
-          <h1 className='collections-page__title'>Collections</h1>
-          <p style={{ color: 'red' }}>{error}</p>
         </div>
       </div>
     );

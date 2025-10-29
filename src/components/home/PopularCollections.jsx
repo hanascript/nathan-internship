@@ -6,7 +6,7 @@ import { Carousel, CarouselItem } from '../ui/Carousel';
 import CollectionCard from '../ui/CollectionCard';
 
 export default function PopularCollections() {
-  const { data: popularCollections, loading, error } = useFetch('/popularCollections');
+  const { data: popularCollections, loading } = useFetch('/popularCollections');
 
   if (loading) {
     return (
@@ -21,19 +21,6 @@ export default function PopularCollections() {
                 </CarouselItem>
               ))}
             </Carousel>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section id='popular-collections'>
-        <div className='container'>
-          <div className='row'>
-            <h2 className='popular-collections__title'>Popular Collections</h2>
-            <p style={{ color: 'red' }}>{error}</p>
           </div>
         </div>
       </section>

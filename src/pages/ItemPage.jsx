@@ -13,7 +13,7 @@ export default function ItemPage() {
     window.scrollTo(0, 0);
   }, [id]);
 
-  const { data: item, loading, error } = useFetch(`/item/${id}`);
+  const { data: item, loading } = useFetch(`/item/${id}`);
 
   return (
     <>

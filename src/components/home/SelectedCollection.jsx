@@ -7,37 +7,13 @@ import VerifiedIcon from '../../assets/verified.png';
 import Skeleton from '../ui/Skeleton';
 
 export default function SelectedCollection() {
-  const { data: collection, loading, error } = useFetch('/selectedCollection');
+  const { data: collection, loading } = useFetch('/selectedCollection');
 
   if (loading) {
     return (
       <header>
         <div className='selected-collection'>
           <Skeleton width='100%' height='100%' borderRadius='0px' />
-        </div>
-      </header>
-    );
-  }
-
-  if (error) {
-    return (
-      <header>
-        <div className='selected-collection'>
-          <div className='selected-collection__description'>
-            <p style={{ color: 'red', fontSize: '24px' }}>{error}</p>
-          </div>
-        </div>
-      </header>
-    );
-  }
-
-  if (!collection) {
-    return (
-      <header>
-        <div className='selected-collection'>
-          <div className='selected-collection__description'>
-            <p style={{ color: 'red', fontSize: '24px' }}>No collection found</p>
-          </div>
         </div>
       </header>
     );

@@ -16,7 +16,7 @@ export default function UserPage() {
 
   const { id } = useParams();
 
-  const { data: user, loading, error } = useFetch(`/user/${id}`);
+  const { data: user, loading } = useFetch(`/user/${id}`);
 
   const [visible, setVisible] = useState(12);
   const [sortOrder, setSortOrder] = useState('DEFAULT');
