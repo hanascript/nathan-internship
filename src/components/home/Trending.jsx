@@ -14,13 +14,13 @@ export default function Trending() {
       <section id='trending' data-aos='fade-up'>
         <div className='container'>
           <div className='row trending__row'>
-            <div className='trending__header'>
+            <div className='trending__header' data-aos='fade-up' data-aos-delay='0'>
               <h2 className='trending__header__title'>Trending NFTs</h2>
               <Link className='trending__header__button' to={'/collections'}>
                 View All
               </Link>
             </div>
-            <div className='trending__body'>
+            <div className='trending__body' data-aos='fade-up' data-aos-delay='100'>
               <div className='trending-column'>
                 <div className='trending-column__header'>
                   <div className='trending-column__header__rank'>#</div>
@@ -95,16 +95,16 @@ export default function Trending() {
   }
 
   return (
-    <section id='trending'>
+    <section id='trending' data-aos='fade-up'>
       <div className='container'>
         <div className='row trending__row'>
-          <div className='trending__header'>
-            <h2 className='trending__header__title'>Trending NFTs</h2>
+          <div className='trending__header' data-aos='fade-up' data-aos-delay='0'>
+            <h2 className='trending__header__title' >Trending NFTs</h2>
             <Link className='trending__header__button' to={'/collections'}>
               View All
             </Link>
           </div>
-          <div className='trending__body'>
+          <div className='trending__body' data-aos='fade-up' data-aos-delay='100'>
             <div className='trending-column'>
               <div className='trending-column__header'>
                 <div className='trending-column__header__rank'>#</div>

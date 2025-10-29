@@ -13,14 +13,18 @@ export default function NewCollections() {
       <section id='new-collections'>
         <div className='container'>
           <div className='row'>
-            <h2 className='new-collections__title'>New Collections</h2>
-            <Carousel>
-              {new Array(9).fill(0).map((_, index) => (
-                <CarouselItem key={index}>
-                  <CollectionCard.Skeleton />
-                </CarouselItem>
-              ))}
-            </Carousel>
+            <h2 className='new-collections__title' data-aos='fade-up' data-aos-delay='0'>
+              New Collections
+            </h2>
+            <div data-aos='fade-up' data-aos-delay='100'>
+              <Carousel>
+                {new Array(9).fill(0).map((_, index) => (
+                  <CarouselItem key={index}>
+                    <CollectionCard.Skeleton />
+                  </CarouselItem>
+                ))}
+              </Carousel>
+            </div>
           </div>
         </div>
       </section>
@@ -31,16 +35,18 @@ export default function NewCollections() {
     <section id='new-collections'>
       <div className='container'>
         <div className='row'>
-          <h2 className='new-collections__title'>New Collections</h2>
-          <Carousel>
-            {collections.map((collection, index) => (
-              <CarouselItem key={index}>
-                <CollectionCard
-                  {...collection}
-                />
-              </CarouselItem>
-            ))}
-          </Carousel>
+          <h2 className='new-collections__title' data-aos='fade-up' data-aos-delay='0'>
+            New Collections
+          </h2>
+          <div data-aos='fade-up' data-aos-delay='100'>
+            <Carousel>
+              {collections.map((collection, index) => (
+                <CarouselItem key={index}>
+                  <CollectionCard {...collection} />
+                </CarouselItem>
+              ))}
+            </Carousel>
+          </div>
         </div>
       </div>
     </section>

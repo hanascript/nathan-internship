@@ -14,7 +14,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    AOS.init({ duration: 3000 });
+    AOS.init({ duration: 500 });
   }, []);
 
   return (
