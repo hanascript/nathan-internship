@@ -1,7 +1,7 @@
 import React from 'react';
 import Skeleton from '../ui/Skeleton';
 
-export default function CollectionInfo({ description, creatorEarnings, chain, createdDate, totalItems, loading }) {
+export default function CollectionInfo({ description, creatorEarnings, chain, createdDate, items, loading }) {
   if (loading) {
     return (
       <section id='collection-info'>
@@ -42,7 +42,7 @@ export default function CollectionInfo({ description, creatorEarnings, chain, cr
           <div className='collection-info__details'>
             <span className='collection-info__detail'>
               Items
-              <span className='collection-info__detail__data'> {totalItems}</span>
+              <span className='collection-info__detail__data'> {items.length}</span>
             </span>
             ·
             <span className='collection-info__detail'>
