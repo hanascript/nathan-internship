@@ -70,7 +70,7 @@ export default function CollectionItems({ items, loading }) {
               <div className='green-pulse'></div>
               Live
             </span>
-            <span className='collection-items__header__results'>10 results</span>
+            <span className='collection-items__header__results'>{items.length} results</span>
           </div>
           <select className='collection-items__header__sort' onChange={handleSort}>
             <option value='DEFAULT' default>

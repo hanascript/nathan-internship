@@ -42,7 +42,13 @@ export default function PopularCollections() {
             <Carousel>
               {popularCollections.map((collection, index) => (
                 <CarouselItem key={index}>
-                  <CollectionCard {...collection} />
+                  <CollectionCard
+                    id={collection.collectionId}
+                    imageLink={collection.imageLink}
+                    title={collection.title}
+                    floor={collection.floor}
+                    totalVolume={collection.totalVolume}
+                  />
                 </CarouselItem>
               ))}
             </Carousel>
